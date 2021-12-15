@@ -26,7 +26,7 @@ def handler_info():
     curr_time = time.gmtime(time.time())
 
     lines = [
-        f"Just updated code! This is a new app with docker support!",
+        f"This is Release4 from GitHub! This is a new app with docker support!",
         "",
         f"Python version: {sys.version}",
         "",
