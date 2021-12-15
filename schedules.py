@@ -30,12 +30,12 @@ def loadAllSchedules(data_directory):
     return result
 
 
-def findAllSchedules() -> list[str]:
+def findAllSchedules():
     result = [id for id in all_schedules.keys()]
     return result
 
 
-def findSchedules(config: dict) -> list[str]:
+def findSchedules(config: dict):
     result = []
     for id, item in all_schedules.items():
         curr_config = item["configuration"]
