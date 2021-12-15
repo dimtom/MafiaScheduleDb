@@ -1,8 +1,12 @@
 import flask
 import os
+import sys
+import time
 
 import schedules
 
+
+start_time = time.gmtime(time.time())
 
 # create a new flask application
 app = flask.Flask(__name__)
@@ -15,6 +19,21 @@ schedules.all_schedules = schedules.loadAllSchedules(data_directory)
 @app.route("/")
 def handler_main():
     return flask.render_template("index.html", base_url=flask.request.base_url)
+
+
+@app.route("/info", methods=['GET'])
+def handler_info():
+    curr_time = time.gmtime(time.time())
+
+    lines = [
+        f"Python version: {sys.version}",
+        f"Start: {time.asctime(start_time)}",
+        f"Now  : {time.asctime(curr_time)}",
+    ]
+    text = '\n'.join(lines)
+    response = flask.make_response(text)
+    response.mimetype = "text/plain"
+    return response
 
 
 @app.route("/health", methods=['GET'])
