@@ -25,11 +25,14 @@ def handler_main():
 def handler_info():
     curr_time = time.gmtime(time.time())
 
-    lines = [
-        f"This is Release5 from GitHub using new image name!",
-        "",
+    version_lines = []
+    version_filename = "./github_version.txt"
+    if os.path.exists(version_filename):
+        with open() as f:
+            version_lines = f.readlines()
+        
+    lines = version_lines + [
         f"Python version: {sys.version}",
-        "",
         f"Start: {time.asctime(start_time)}",
         f"Now  : {time.asctime(curr_time)}",
     ]
