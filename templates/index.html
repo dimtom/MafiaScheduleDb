@@ -1,0 +1,35 @@
+<html>
+
+<body>
+    <h1>Welcome to Mafia schedule database</h1>
+
+    <h2>Here is a list of API endpoints:</h2>
+    <ul>
+        <li>
+            Get all schedules.
+            <p>Returns the list of all schedule names in JSON form.</p>
+            <p>Example: <a href="{{ base_url }}schedule"> {{ base_url }}schedule</a></p>
+        </li>
+
+        <li>
+            Get schedule by ID.
+            <p>Returns schedule by ID in JSON form. If schedule is not found HTTP Error 404 is returned.</p>
+            <p>Example: <a href="{{ base_url }}schedule/vawaca2021_seats"> {{ base_url }}schedule/vawaca2021_seats</a>
+            </p>
+        </li>
+
+        <li>
+            Find schedules by parameters: players, tables, distance.
+            <p>Returns the list of schedule names that match a query (players, tables, distance).</p>
+            <p>Example 1: <a href="{{ base_url }}find?players=36"> {{ base_url }}find?players=36</a>
+            <p>Example 2: <a href="{{ base_url }}find?players=36&tables=3&distance=10"> {{ base_url
+                    }}find?players=36&tables=3&distance=10</a>
+
+        </li>
+
+
+    </ul>
+
+</body>
+
+</html>

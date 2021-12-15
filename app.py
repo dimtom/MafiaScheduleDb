@@ -7,7 +7,7 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def handler_main():
-    return "MafiaScheduleDb"
+    return flask.render_template("index.html", base_url=flask.request.base_url)
 
 
 @app.route("/health", methods=['GET'])
