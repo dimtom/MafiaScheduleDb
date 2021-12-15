@@ -6,8 +6,7 @@ on:
 
 env:
   REGISTRY: dimtomregistry.azurecr.io
-  IMAGE_NAME: my-custom-image
-  # IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}
   
 jobs:
   push_to_registry:
