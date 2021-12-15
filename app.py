@@ -28,9 +28,9 @@ def handler_info():
     version_lines = []
     version_filename = "./github_version.txt"
     if os.path.exists(version_filename):
-        with open() as f:
+        with open(version_filename) as f:
             version_lines = f.readlines()
-        
+
     lines = version_lines + [
         f"Python version: {sys.version}",
         f"Start: {time.asctime(start_time)}",
