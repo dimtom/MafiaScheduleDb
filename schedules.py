@@ -1,6 +1,8 @@
 import os
+import itertools
 import json
 
+import mafia_schedule as ms
 
 '''
 Global dictionary with all schedules
@@ -55,8 +57,24 @@ def getJsonSchedule(id) -> dict:
 
 
 def getMwtSchedule(id) -> str:
-    return "Not implemented"
+    s = ms.Schedule.fromJson(all_schedules[id])
+    lines = ms.Print.mwtSchedule(s)
+    return '\n'.join(lines)
 
 
 def getLogSchedule(id) -> str:
-    return "Not implemented"
+    s = ms.Schedule.fromJson(all_schedules[id])
+    s.generateSlotsFromGames()
+
+    lines = itertools.chain(
+        ms.Print.scheduleByGames(s),
+        ms.Print.scheduleByPlayers(s),
+        ms.Print.opponentsMatrix(s),
+        ms.Print.pairsMatrix(s),
+        ms.Print.minMaxPairs(s, [0, 1]),
+        ms.Print.minMaxPairs(s, [6, 7, 8, 9]),
+        ms.Print.seatsMatrix(s),
+        ["\n*** MWT-compatible schedule:"],
+        ms.Print.mwtSchedule(s))
+
+    return '\n'.join(lines)
