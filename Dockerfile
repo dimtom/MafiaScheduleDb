@@ -18,7 +18,9 @@ WORKDIR /app
 COPY . /app
 
 # copy .env file - it is ignored as it starts from .
+RUN ls -la .
 COPY [".env", "/app"]
+RUN ls -la /app
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
