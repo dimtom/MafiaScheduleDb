@@ -23,7 +23,7 @@ if connection_string:
         connection_string, container_name)
 
     # just a hint that data was loaded from Azure Blob service
-    schedules.all_schedules["azure"] = '{"azure": 1}'
+    schedules.all_schedules["__azure__"] = '{"azure": 1}'
 
 
 @app.route("/")
