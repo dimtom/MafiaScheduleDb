@@ -4,6 +4,9 @@ import json
 
 import mafia_schedule as ms
 
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+
+
 '''
 Global dictionary with all schedules
 '''
@@ -31,6 +34,23 @@ def loadAllSchedules(data_directory):
     print(f"Total number of schedules loaded: {len(result)}")
     return result
 
+def loadAllSchedulesFromAzure(connection_string, container_name):
+    '''
+    Load all schedules from Azure blob service (in schedules container)
+    '''
+    service = BlobServiceClient.from_connection_string(connection_string)
+    container = service.get_container_client(container_name)
+
+    result = {}
+    for blob in container.list_blobs():
+        stream = container.download_blob(blob)
+        s = stream.content_as_text()
+        result[blob.name] = s
+    
+    print(f"Total number of schedules loaded: {len(result)}")
+    return result
+      
+        
 
 def findAllSchedules():
     result = [id for id in all_schedules.keys()]

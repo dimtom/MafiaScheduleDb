@@ -5,6 +5,7 @@ import time
 
 import schedules
 
+from decouple import config
 
 start_time = time.gmtime(time.time())
 
@@ -12,8 +13,17 @@ start_time = time.gmtime(time.time())
 app = flask.Flask(__name__)
 
 # initialization: load all schedules to dictionary
-data_directory = os.path.join(app.root_path, 'data')
-schedules.all_schedules = schedules.loadAllSchedules(data_directory)
+# data_directory = os.path.join(app.root_path, 'data')
+# schedules.all_schedules = schedules.loadAllSchedules(data_directory)
+
+connection_string = config('AZURE_STORAGE_CONNECTION_STRING', default=None)
+container_name = "schedules"
+if connection_string:
+    schedules.all_schedules = schedules.loadAllSchedulesFromAzure(
+        connection_string, container_name)
+
+    # just a hint that data was loaded from Azure Blob service
+    schedules.all_schedules["azure"] = '{"azure": 1}'
 
 
 @app.route("/")

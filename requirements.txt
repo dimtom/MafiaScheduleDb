@@ -1,2 +1,5 @@
 flask
 mafia_schedule
+azure-storage-blob
+python-decouple
+
