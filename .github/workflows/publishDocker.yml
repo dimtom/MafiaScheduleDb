@@ -8,6 +8,7 @@ env:
   REGISTRY: dimtomregistry.azurecr.io
   IMAGE_NAME: ${{ github.repository }}
   VERSION_FILE: ./github_version.txt
+  ENV_FILE: .env
   
 jobs:
   push_to_registry:
@@ -21,6 +22,12 @@ jobs:
         run: | 
           echo Git release: $GITHUB_REF >> $VERSION_FILE
           echo Git commit: $GITHUB_SHA >> $VERSION_FILE
+          
+      - name: Add .env file
+        run: |
+          echo "Adding secrets to .env file"
+          echo AZURE_STORAGE_CONNECTION_STRING="${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> $ENV_FILE
+          cat $ENV_FILE
       
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
