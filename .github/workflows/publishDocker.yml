@@ -9,7 +9,6 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   VERSION_FILE: ./github_version.txt
   ENV_FILE: .env
-  AZURE_STORAGE_CONNECTION_STRING: ${{secrets.AZURE_STORAGE_CONNECTION_STRING}}
   
 jobs:
   push_to_registry:
@@ -26,7 +25,8 @@ jobs:
           
       - name: Add .env file
         run: |
-          echo AZURE_STORAGE_CONNECTION_STRING="$AZURE_STORAGE_CONNECTION_STRING" >> $ENV_FILE
+          echo "Adding secrets to .env file"
+          echo AZURE_STORAGE_CONNECTION_STRING="${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> $ENV_FILE
           cat $ENV_FILE
       
       - name: Log in to Docker Hub
