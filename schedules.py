@@ -34,6 +34,7 @@ def loadAllSchedules(data_directory):
     print(f"Total number of schedules loaded: {len(result)}")
     return result
 
+
 def loadAllSchedulesFromAzure(connection_string, container_name):
     '''
     Load all schedules from Azure blob service (in schedules container)
@@ -46,11 +47,10 @@ def loadAllSchedulesFromAzure(connection_string, container_name):
         stream = container.download_blob(blob)
         s = stream.content_as_text()
         result[blob.name] = s
-    
+
     print(f"Total number of schedules loaded: {len(result)}")
     return result
-      
-        
+
 
 def findAllSchedules():
     result = [id for id in all_schedules.keys()]
@@ -60,6 +60,9 @@ def findAllSchedules():
 def findSchedules(config: dict):
     result = []
     for id, item in all_schedules.items():
+        # skip special items like __azure__
+        if id.startswith("__") and id.endswith("__"):
+            continue
         curr_config = item["configuration"]
         if config["numTables"] and config["numTables"] != curr_config["numTables"]:
             continue
