@@ -41,20 +41,11 @@ def handler_info():
         with open(version_filename) as f:
             version_lines = f.readlines()
 
-    # for debug only - delete this!
-    env_lines = []
-    env_filename = ".env"
-    if os.path.exists(env_filename):
-        with open(env_filename) as f:
-            env_lines = f.readlines()
-    else:
-        env_lines = ["<.env file not found>"]
-
     lines = version_lines + [
         f"Python version: {sys.version}",
         f"Start: {time.asctime(start_time)}",
         f"Now  : {time.asctime(curr_time)}",
-    ] + env_lines
+    ]
     text = '\n'.join(lines)
     response = flask.make_response(text)
     response.mimetype = "text/plain"
