@@ -12,10 +12,6 @@ start_time = time.gmtime(time.time())
 # create a new flask application
 app = flask.Flask(__name__)
 
-# initialization: load all schedules to dictionary
-# data_directory = os.path.join(app.root_path, 'data')
-# schedules.all_schedules = schedules.loadAllSchedules(data_directory)
-
 connection_string = config('AZURE_STORAGE_CONNECTION_STRING', default=None)
 container_name = "schedules"
 if connection_string:
@@ -23,6 +19,7 @@ if connection_string:
         connection_string, container_name)
 
     # just a hint that data was loaded from Azure Blob service
+    # mark as __foo__: to skip this JSON from find/processing
     schedules.all_schedules["__azure__"] = '{"azure": 1}'
 
 

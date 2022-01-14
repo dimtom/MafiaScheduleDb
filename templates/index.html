@@ -14,7 +14,17 @@
         <li>
             Get schedule by ID.
             <p>Returns schedule by ID in JSON form. If schedule is not found HTTP Error 404 is returned.</p>
-            <p>Example: <a href="{{ base_url }}schedule/vawaca2021_seats"> {{ base_url }}schedule/vawaca2021_seats</a>
+            <p>Example 1: raw JSON:
+                <a href="{{ base_url }}schedule/vawaca2021_seats">
+                    {{ base_url}}schedule/vawaca2021_seats</a>
+            </p>
+            <p>Example 2: text in MWT format:
+                <a href="{{ base_url }}schedule/vawaca2021_seats?mode=mwt">
+                    {{ base_url}}schedule/vawaca2021_seats?mode=mwt</a>
+            </p>
+            <p>Example 3: text log
+                <a href="{{ base_url }}schedule/vawaca2021_seats?mode=log">
+                    {{ base_url}}schedule/vawaca2021_seats?mode=log</a>
             </p>
         </li>
 

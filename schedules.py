@@ -45,8 +45,9 @@ def loadAllSchedulesFromAzure(connection_string, container_name):
     result = {}
     for blob in container.list_blobs():
         stream = container.download_blob(blob)
-        s = stream.content_as_text()
-        result[blob.name] = s
+        schedule_str = stream.content_as_text()
+        schedule_json = json.loads(schedule_str)
+        result[blob.name] = schedule_json
 
     print(f"Total number of schedules loaded: {len(result)}")
     return result
