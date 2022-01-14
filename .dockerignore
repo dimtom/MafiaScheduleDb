@@ -23,3 +23,8 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 README.md
+
+# we need to allow .env file explicitly
+# as we put GitHub secret: AZURE_STORAGE_CONNECTION_STRING to it
+# when building docker image from GitHub action
+!.env
