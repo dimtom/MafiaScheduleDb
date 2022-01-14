@@ -43,7 +43,7 @@ def handler_info():
 
     # for debug only - delete this!
     env_lines = []
-    env_filename = ".env"
+    env_filename = "env"
     if os.path.exists(env_filename):
         with open(env_filename) as f:
             env_lines = f.readlines()
